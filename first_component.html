@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="keywords" content="" >
+		<meta name="description" content="">
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="yes" name="apple-touch-fullscreen" />
+		<meta name="full-screen" content="yes">
+		<meta name="x5-fullscreen" content="true" />
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-orientation" content="portrait">
+		<meta content="telephone=no,email=no" name="format-detection" />
+        <script src="http://cdn.bootcss.com/react/15.1.0/react.min.js"></script>
+        <script src="http://cdn.bootcss.com/react/15.1.0/react-dom.min.js"></script>
+        <!--JSX转标准JS的库-->
+        <script src="http://cdn.bootcss.com/babel-core/5.8.23/browser.min.js"></script>
+		<title>第一个组件测试，评论功能</title>
+	</head>
+	<body>
+        <div id="commentBox"></div>
+        <script type="text/babel">
+          //React 类名以大写字母开头，定义组件
+          var CommentBox=React.createClass({
+            render:function(){
+                //class用className代替
+                return (
+                    //使用组件
+                    <ul id="comment" className="comment">
+                        <CommentList />
+                        <CommentForm />
+                    </ul>
+                )
+            }
+          });
+          //评论列表
+          var CommentList=React.createClass({
+            render:function(){
+                return (
+                    <li className="list"><span className="name">无尽的故事：</span>内容</li>
+                )
+            }
+          });
+          //提交评论
+          var CommentForm=React.createClass({
+            render:function(){
+                return(
+                    <div className="form">
+                        <div><textarea placeholder="评论内容"></textarea></div>
+                        <div><input type="button" value="提交"/></div>
+                    </div>
+                )
+            }
+          });
+          ReactDOM.render(
+           //使用组件
+            <CommentBox />,
+            document.getElementById('commentBox')
+          );
+        </script>
+	</body>
+</html>
