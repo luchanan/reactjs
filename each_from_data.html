@@ -19,7 +19,12 @@
 	</head>
 	<body>
         <div id="commentBox"></div>
+
         <script type="text/babel">
+          var data=[
+            {'name':'无尽的故事','content':'可以了'},
+            {'name':'玲','content':'够了'}
+          ];
           //React 类名以大写字母开头，定义组件
           var CommentBox=React.createClass({
             render:function(){
@@ -27,7 +32,7 @@
                 return (
                     //使用组件,使用属性
                     <ul id="comment" className="comment">
-                        <CommentList id='1'>发表内容一</CommentList>
+                        <CommentList data={this.props.data}/>
                         <CommentForm />
                     </ul>
                 )
@@ -36,9 +41,17 @@
           //评论列表
           var CommentList=React.createClass({
             render:function(){
-                //获取属性{this.props.id}
+                //遍历
+                var commentNode=this.props.data.map(function(comment){
+                    return (
+                        //不明白为何一定要用标签包起来才可以解析
+                      <div className="list"><span className="name" >{comment.name}</span>{comment.content}</div>
+
+                      );
+                });
                 return (
-                    <li className="list"><span className="name" id={this.props.id}>无尽的故事：</span>{this.props.children}</li>
+                //不明白为何一定要用标签包起来才可以解析
+                  <li className="list">{commentNode}</li>
                 )
             }
           });
@@ -55,7 +68,7 @@
           });
           ReactDOM.render(
            //使用组件
-            <CommentBox />,
+            <CommentBox data={data}/>,
             document.getElementById('commentBox')
           );
         </script>
